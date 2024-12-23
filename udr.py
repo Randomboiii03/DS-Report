@@ -7,7 +7,7 @@ def udr_display(df):
 
     report_df = df[~df['Call Status'].isna()]
     report_df['IsConnected'] = np.where(report_df['Talk Time Duration'] > 0, 'CONNECTED', 'NOT CONNECTED')
-    report_df['Call Type'] = np.where(report_df['Remark Type'].str.lower() == 'predictive', 'Predictive', 'Manual')
+    report_df['Call Type'] = np.where((report_df['Remark Type'].str.lower() == 'predictive') | (report_df['Remark'].str.contains('predictive', case=False)), 'Predictive', 'Manual')
 
     report_df['Time'] = pd.to_datetime(report_df['Time'], format='%H:%M:%S', errors='coerce')
     report_df['Hour'] = report_df['Time'].dt.hour
