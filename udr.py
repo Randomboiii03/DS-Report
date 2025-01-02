@@ -68,7 +68,7 @@ def udr_display(df):
 
 
     fig = px.line(summary_connected_df, x='Hour', y='debtor_connected_count', color='Call Type', 
-              title='Unique Connected Calls per Hour by Call Type',
+              title='Unique Connected Calls per Hour by Call Types',
               labels={'debtor_connected_count': 'Connected Calls', 'Hour': 'Hour'},
               markers=True)
     
