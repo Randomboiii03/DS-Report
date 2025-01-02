@@ -86,7 +86,7 @@ def udr_display(df):
         data, 
         names='Relation', 
         values='Count', 
-        title='Distribution of Contacts by Relation',
+        title='Distribution of Contacts by Relations',
         hole=0.3  # Optional: To create a donut chart
     )
     
