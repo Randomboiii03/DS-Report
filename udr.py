@@ -82,7 +82,7 @@ def udr_display(df):
     }
     
     # Creating the pie chart
-    fig = px.pie(
+    fig1 = px.pie(
         data, 
         names='Relation', 
         values='Count', 
@@ -91,7 +91,7 @@ def udr_display(df):
     )
     
     # Display the chart
-    fig.show()
+    st.plotly_chart(fig1)
 
     fig_pie_call_type = px.pie(summary_connected_df, names='Call Type', values='debtor_connected_count',
                             title='Distribution of Connected Calls by Call Type')
