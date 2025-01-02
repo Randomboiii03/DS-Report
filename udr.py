@@ -76,15 +76,22 @@ def udr_display(df):
 
     st.dataframe(pivot_overall_df_reset, hide_index=True, use_container_width=True)
 
-    labels = ['Related Party Contact', 'Debtor', 'Unknown Party Contact']
-    sizes = [total_rpc, total_debtor, total_unk]
-    colors = ['#ff9999', '#66b3ff', '#99ff99']
+    data = {
+    'Relation': ['Related Party Contact', 'Debtor', 'Unknown Party Contact'],
+    'Count': [total_rpc, total_debtor, total_unk]
+    }
     
-    # Plotting the pie chart
-    plt.figure(figsize=(8, 8))
-    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors, textprops={'fontsize': 12})
-    plt.title('Distribution of Contacts by Relation', fontsize=16)
-    plt.show()
+    # Creating the pie chart
+    fig = px.pie(
+        data, 
+        names='Relation', 
+        values='Count', 
+        title='Distribution of Contacts by Relation',
+        hole=0.3  # Optional: To create a donut chart
+    )
+    
+    # Display the chart
+    fig.show()
 
     fig_pie_call_type = px.pie(summary_connected_df, names='Call Type', values='debtor_connected_count',
                             title='Distribution of Connected Calls by Call Type')
