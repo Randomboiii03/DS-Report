@@ -77,7 +77,7 @@ def udr_display(df):
     st.dataframe(pivot_overall_df_reset, hide_index=True, use_container_width=True)
 
     data = {
-    'Relation': ['Debtor','Related Party Contact', 'Unknown Party Contact'],
+    'Relation': ['Debtor','Related Party Contact','Unknown Party Contact'],
     'Count': [total_debtor,total_rpc,total_unk]
     }
     
@@ -86,7 +86,7 @@ def udr_display(df):
         data, 
         names='Relation', 
         values='Count', 
-        title='Distribution of Contacts by Relations',
+        title='Distribution of Contacts by Relation',
         hole=0.3  # Optional: To create a donut chart
     )
     
