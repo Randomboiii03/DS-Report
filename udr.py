@@ -78,22 +78,12 @@ def udr_display(df):
 
     labels = ['Related Party Contact', 'Debtor', 'Unknown Party Contact']
     sizes = [total_rpc, total_debtor, total_unk]
-    colors = ['#ff9999','#66b3ff','#99ff99']
-    explode = (0.05, 0.05, 0.05)
+    colors = ['#ff9999', '#66b3ff', '#99ff99']
     
-    # Create the pie chart
+    # Plotting the pie chart
     plt.figure(figsize=(8, 8))
-    plt.pie(
-        sizes,
-        labels=labels,
-        autopct='%1.1f%%',
-        startangle=140,
-        colors=colors,
-        explode=explode,
-        shadow=True
-    )
-    plt.title('Distribution of Debtor Relations')
-    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors, textprops={'fontsize': 12})
+    plt.title('Distribution of Contacts by Relation', fontsize=16)
     plt.show()
 
     fig_pie_call_type = px.pie(summary_connected_df, names='Call Type', values='debtor_connected_count',
