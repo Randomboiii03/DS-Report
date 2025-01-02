@@ -28,6 +28,9 @@ def udr_display(df):
 
     total_connected_predictive = report_df[(report_df['IsConnected'] == 'CONNECTED') & (report_df['Call Type'] == 'Predictive')]['Debtor'].nunique()
     total_connected_manual = report_df[(report_df['IsConnected'] == 'CONNECTED') & (report_df['Call Type'] == 'Manual')]['Debtor'].nunique()
+    total_rpc = report_df[(report_df['Relation'] == 'Related Party Contact')['Debtor'].nunique()
+    total_debtor = report_df[(report_df['Relation'] == 'Debtor')['Debtor'].nunique()
+    total_debtor = report_df[(report_df['Relation'] == 'Unknown Party Contact')['Debtor'].nunique()
 
     total_not_connected_predictive = report_df[(report_df['IsConnected'] == 'NOT CONNECTED') & (report_df['Call Type'] == 'Predictive')]['Debtor'].nunique()
     total_not_connected_manual = report_df[(report_df['IsConnected'] == 'NOT CONNECTED') & (report_df['Call Type'] == 'Manual')]['Debtor'].nunique()
@@ -72,6 +75,26 @@ def udr_display(df):
     st.plotly_chart(fig)
 
     st.dataframe(pivot_overall_df_reset, hide_index=True, use_container_width=True)
+
+    labels = ['Related Party Contact', 'Debtor', 'Unknown Party Contact']
+    sizes = [total_rpc, total_debtor, total_unk]
+    colors = ['#ff9999','#66b3ff','#99ff99']
+    explode = (0.05, 0.05, 0.05)
+    
+    # Create the pie chart
+    plt.figure(figsize=(8, 8))
+    plt.pie(
+        sizes,
+        labels=labels,
+        autopct='%1.1f%%',
+        startangle=140,
+        colors=colors,
+        explode=explode,
+        shadow=True
+    )
+    plt.title('Distribution of Debtor Relations')
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.show()
 
     fig_pie_call_type = px.pie(summary_connected_df, names='Call Type', values='debtor_connected_count',
                             title='Distribution of Connected Calls by Call Type')
