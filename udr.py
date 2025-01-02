@@ -91,7 +91,6 @@ def udr_display(df):
     )
     
     # Display the chart
-    st.plotly_chart(fig1)
 
     fig_pie_call_type = px.pie(summary_connected_df, names='Call Type', values='debtor_connected_count',
                             title='Distribution of Connected Calls by Call Type')
@@ -99,11 +98,13 @@ def udr_display(df):
     fig_pie_call_hour = px.pie(summary_connected_df, names='Hour', values='debtor_connected_count',
                             title='Distribution of Connected Calls per Hour')
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.plotly_chart(fig_pie_call_type)
     with col2:
         st.plotly_chart(fig_pie_call_hour)
+    with col3:
+        st.plotly_chart(fig1)
 
     return pivot_df_reset
