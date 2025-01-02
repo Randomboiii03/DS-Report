@@ -7,7 +7,18 @@ def udr_display(df):
 
     report_df = df[~df['Call Status'].isna()]
     report_df['IsConnected'] = np.where(report_df['Talk Time Duration'] > 0, 'CONNECTED', 'NOT CONNECTED')
-    report_df['Call Type'] = np.where((report_df['Remark Type'].str.lower() == 'predictive') | (report_df['Remark'].str.contains('predictive', case=False)), 'Predictive', 'Manual')
+    #report_df['Call Type'] = np.where((report_df['Remark Type'].str.lower() == 'predictive') | (report_df['Remark'].str.contains('predictive', case=False)), 'Predictive', 'Manual')
+    report_df['Call Type'] = np.where(
+    # Condition 1: 'Predictive' if Remark Type is 'Predictive' or contains 'predictive' in Remark
+    ((report_df['Remark Type'].str.lower() == 'predictive') | 
+     (report_df['Remark'].str.contains('predictive', case=False))) |
+    # Condition 2: 'Predictive' if Remark Type is 'Follow up' and Remark contains 'predictive'
+    ((report_df['Remark Type'].str.lower() == 'follow up') & 
+     (report_df['Remark'].str.contains('predictive', case=False))),
+    'Predictive',  # Assign 'Predictive' if conditions are true
+    # Otherwise, check if Remark Type is 'Outgoing' and assign 'Manual'
+    np.where(report_df['Remark Type'].str.lower() == 'outgoing', 'Manual', 'Manual')  # Default to 'Manual'
+    )
 
     report_df['Time'] = pd.to_datetime(report_df['Time'], format='%H:%M:%S', errors='coerce')
     report_df['Hour'] = report_df['Time'].dt.hour
