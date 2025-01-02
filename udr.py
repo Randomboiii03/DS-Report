@@ -30,7 +30,7 @@ def udr_display(df):
     total_connected_manual = report_df[(report_df['IsConnected'] == 'CONNECTED') & (report_df['Call Type'] == 'Manual')]['Debtor'].nunique()
     total_rpc = report_df[(report_df['Relation'] == 'Related Party Contact')]['Debtor'].nunique()
     total_debtor = report_df[(report_df['Relation'] == 'Debtor')]['Debtor'].nunique()
-    total_debtor = report_df[(report_df['Relation'] == 'Unknown Party Contact')]['Debtor'].nunique()
+    total_unk = report_df[(report_df['Relation'] == 'Unknown Party Contact')]['Debtor'].nunique()
 
     total_not_connected_predictive = report_df[(report_df['IsConnected'] == 'NOT CONNECTED') & (report_df['Call Type'] == 'Predictive')]['Debtor'].nunique()
     total_not_connected_manual = report_df[(report_df['IsConnected'] == 'NOT CONNECTED') & (report_df['Call Type'] == 'Manual')]['Debtor'].nunique()
