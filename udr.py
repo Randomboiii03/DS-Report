@@ -77,8 +77,8 @@ def udr_display(df):
     st.dataframe(pivot_overall_df_reset, hide_index=True, use_container_width=True)
 
     data = {
-    'Relation': ['Related Party Contact', 'Debtor', 'Unknown Party Contact'],
-    'Count': [total_rpc, total_debtor, total_unk]
+    'Relation': ['Debtor','Related Party Contact', 'Unknown Party Contact'],
+    'Count': [total_debtor,total_rpc,total_unk]
     }
     
     # Creating the pie chart
