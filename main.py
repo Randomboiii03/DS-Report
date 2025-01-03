@@ -30,7 +30,8 @@ def extract_data(uploaded_file):
 
     return df
 
-if udr_file is not None and ch_file is not None:
+#if udr_file is not None and ch_file is not None:
+if udr_file is not None:
 
     udr_df = udr_display(extract_data(udr_file))
 
